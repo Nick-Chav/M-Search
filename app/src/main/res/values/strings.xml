@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">M-Search</string>
+    <string name="country_selection_title">Country Selection</string>
+    <string name="mode_selection_title">Mode selection</string>
+    <string name="app_next">Next</string>
+    <string name="app_back">Back</string>
+    <string name="select_from">Select country from:</string>
+    <string name="select_to">Select country to:</string>
+    <string name="mode_selection_instructions">Please select which mode you want to use to identify your medication</string>
+    <string name="country_selection_instructions">Please select the initial country the medication is coming from and the country you want to search for alternatives in.</string>
 </resources>
