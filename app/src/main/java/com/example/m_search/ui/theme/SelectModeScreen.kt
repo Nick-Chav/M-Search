@@ -26,12 +26,15 @@ import com.example.m_search.R
 
 @Composable
 fun SelectModeScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onManualButtonClicked: () -> Unit,
+    onScanButtonClicked: () -> Unit,
+    onBackButtonClicked: () -> Unit,
 ) {
     Column(
         modifier = modifier.padding(top = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
             text = stringResource(R.string.mode_selection_title),
@@ -56,7 +59,7 @@ fun SelectModeScreen(
                     .heightIn(min = 100.dp)
                     .weight(1f)
                     .padding(10.dp),
-                onClick = {},
+                onClick = onManualButtonClicked,
             ){
                 Text(
                     text = stringResource(R.string.mode_manual),
@@ -68,7 +71,7 @@ fun SelectModeScreen(
                     .heightIn(min = 100.dp)
                     .weight(1f)
                     .padding(10.dp),
-                onClick = {}
+                onClick = onScanButtonClicked
             ){
                 Text(
                     text = stringResource(R.string.mode_scan),
@@ -78,7 +81,7 @@ fun SelectModeScreen(
         }
         OutlinedButton(
             modifier = Modifier.widthIn(min = 250.dp),
-            onClick = {}
+            onClick = onBackButtonClicked
         ){
             Text(text = stringResource(R.string.app_back))
         }
@@ -92,7 +95,8 @@ fun SelectModePreview() {
         SelectModeScreen(
             modifier = Modifier
                 .padding(dimensionResource(R.dimen.padding_medium))
-                .fillMaxSize()
+                .fillMaxSize(),
+            {},{},{}
         )
     }
 }

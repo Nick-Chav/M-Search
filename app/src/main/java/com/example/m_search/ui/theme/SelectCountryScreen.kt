@@ -35,66 +35,62 @@ import com.example.m_search.data.DataSource
 @Composable
 fun SelectCountryScreen(
     modifier: Modifier = Modifier,
+    onNextButtonClicked: () -> Unit,
+    onBackButtonClicked: () -> Unit,
 ) {
 
     Column(
-        modifier = modifier.padding(top = 16.dp),
+        modifier = modifier.padding(16.dp),
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = stringResource(R.string.country_selection_title),
             style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Justify,
-            modifier = Modifier.padding(bottom = 0.dp)
         )
-        Spacer(modifier = Modifier.height(30.dp))
         Column(
-            modifier = modifier,
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))) {
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.padding_medium))) {
 
+            Text(
+                text = stringResource(R.string.country_selection_instructions),
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center
+            )
+
+            Column(modifier = Modifier.padding(vertical = 40.dp)) {
+                Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = stringResource(R.string.country_selection_instructions),
-                    style = MaterialTheme.typography.bodyLarge,
-                    textAlign = TextAlign.Center
+                    text = stringResource(R.string.select_from),
+                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
+                    style = MaterialTheme.typography.headlineSmall
                 )
-
-                Column(modifier = Modifier.padding(vertical = 40.dp)) {
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Text(
-                        text = stringResource(R.string.select_from),
-                        modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
-                    DropDown(DataSource.countryListFrom)
-                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
-                    Text(
-                        text = stringResource(R.string.select_to),
-                        modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
-                    DropDown(DataSource.countryListTo)
-                }
+                DropDown(DataSource.countryListFrom)
+                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
+                Text(
+                    text = stringResource(R.string.select_to),
+                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                DropDown(DataSource.countryListTo)
             }
+        }
 
-            Column() {
-                Button(
-                    modifier = Modifier.widthIn(min = 250.dp),
-                    onClick = {}
-                ){
-                    Text(text = stringResource(R.string.app_next))
-                }
-                OutlinedButton(
-                    modifier = Modifier.widthIn(min = 250.dp),
-                    onClick = {}
-                ){
-                    Text(text = stringResource(R.string.app_back))
-                }
+        Column(verticalArrangement = Arrangement.spacedBy(
+            dimensionResource(id = R.dimen.padding_medium)
+        )) {
+            Button(
+                modifier = Modifier.widthIn(min = 250.dp),
+                onClick = onNextButtonClicked
+            ){
+                Text(text = stringResource(R.string.app_next))
+            }
+            OutlinedButton(
+                modifier = Modifier.widthIn(min = 250.dp),
+                onClick = onBackButtonClicked
+            ){
+                Text(text = stringResource(R.string.app_back))
             }
         }
     }
@@ -144,7 +140,9 @@ fun SelectCountryPreview() {
         SelectCountryScreen(
             modifier = Modifier
                 .padding(dimensionResource(R.dimen.padding_medium))
-                .fillMaxSize()
+                .fillMaxSize(),
+            {},
+            {}
         )
     }
 }
