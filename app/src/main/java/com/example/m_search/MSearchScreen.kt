@@ -25,6 +25,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.m_search.ui.theme.EnterDataScreen
+import com.example.m_search.ui.theme.InstructionsScreen
 import com.example.m_search.ui.theme.SelectCountryScreen
 import com.example.m_search.ui.theme.SelectModeScreen
 import com.example.m_search.ui.theme.StartScreen
@@ -34,12 +36,13 @@ enum class MSearchScreen {
     START,
     SELECT_COUNTRY,
     SELECT_MODE,
-
+    MANUAL_SELECT,
+    INSTRUCTIONS
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CupcakeAppBar(
+fun MSearchAppBar(
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier
@@ -76,7 +79,7 @@ fun MSearchApp(
 
     Scaffold(
         topBar = {
-            CupcakeAppBar(
+            MSearchAppBar(
                 canNavigateBack = navController.previousBackStackEntry != null,
                 navigateUp = { navController.popBackStack(MSearchScreen.START.name, inclusive = false) }
             )
@@ -91,6 +94,9 @@ fun MSearchApp(
                     modifier = Modifier.fillMaxSize(),
                     onStartButtonClicked = {
                         navController.navigate(MSearchScreen.SELECT_COUNTRY.name)
+                    },
+                    onInstructionsButtonClicked = {
+                        navController.navigate(route = MSearchScreen.INSTRUCTIONS.name)
                     }
                 )
             }
@@ -112,10 +118,33 @@ fun MSearchApp(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(dimensionResource(R.dimen.padding_medium)),
-                    onManualButtonClicked = {},
+                    onManualButtonClicked = {
+                        navController.navigate(route = MSearchScreen.MANUAL_SELECT.name)
+                    },
                     onScanButtonClicked = {},
                     onBackButtonClicked = {
                         navController.navigate(route = MSearchScreen.SELECT_COUNTRY.name)
+                    }
+                )
+            }
+            composable(route = MSearchScreen.MANUAL_SELECT.name) {
+                EnterDataScreen(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(dimensionResource(R.dimen.padding_medium)),
+                    onNextButtonClicked = {},
+                    onBackButtonClicked = {
+                        navController.navigate(route = MSearchScreen.SELECT_MODE.name)
+                    }
+                )
+            }
+            composable(route = MSearchScreen.INSTRUCTIONS.name) {
+                InstructionsScreen(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(dimensionResource(R.dimen.padding_medium)),
+                    onBackButtonClicked = {
+                        navController.navigate(route = MSearchScreen.START.name)
                     }
                 )
             }

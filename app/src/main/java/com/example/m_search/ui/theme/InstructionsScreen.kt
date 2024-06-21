@@ -27,28 +27,28 @@ import com.example.compose.MSearchTheme
 import com.example.m_search.R
 
 @Composable
-fun StartScreen(
+fun InstructionsScreen(
     modifier: Modifier = Modifier,
-    onStartButtonClicked: () -> Unit,
-    onInstructionsButtonClicked: () -> Unit,
+    onBackButtonClicked: () -> Unit,
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.SpaceEvenly
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(
+            text = stringResource(R.string.instructions),
+            style = MaterialTheme.typography.headlineLarge,
+            textAlign = TextAlign.Center,
+        )
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
         ) {
-            Image(
-                painter = painterResource(R.drawable.m_search_logo),
-                contentDescription = null,
-                modifier = Modifier.width(400.dp)
-            )
             Text(
-                text = stringResource(R.string.app_description),
-                style = MaterialTheme.typography.headlineSmall,
+                text = stringResource(R.string.instructions_content),
+                style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
@@ -56,21 +56,12 @@ fun StartScreen(
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(
-                dimensionResource(id = R.dimen.padding_medium)
-            )
         ) {
             Button(
                 modifier = Modifier.widthIn(min = 250.dp),
-                onClick = onStartButtonClicked
+                onClick = onBackButtonClicked
             ){
-                Text(text = stringResource(R.string.start))
-            }
-            OutlinedButton(
-                modifier = Modifier.widthIn(min = 250.dp),
-                onClick = onInstructionsButtonClicked
-            ){
-                Text(text = stringResource(R.string.instructions))
+                Text(text = stringResource(R.string.app_back))
             }
         }
     }
@@ -78,8 +69,8 @@ fun StartScreen(
 
 @Composable
 @Preview(showBackground = true)
-fun StartOrderPreview() {
+fun InstructionsScreenPreview() {
     MSearchTheme {
-        StartScreen(modifier = Modifier.fillMaxSize().padding(dimensionResource(R.dimen.padding_medium)), {}, {})
+        InstructionsScreen(modifier = Modifier.fillMaxSize().padding(dimensionResource(R.dimen.padding_medium)), {})
     }
 }
