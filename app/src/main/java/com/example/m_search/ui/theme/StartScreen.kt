@@ -75,7 +75,7 @@ fun StartScreen(
         }
     }
 }
-
+//TODO Fix Back button X interaction
 @Composable
 @Preview(showBackground = true)
 fun StartOrderPreview() {

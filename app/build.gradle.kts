@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-
+    implementation("org.jetbrains.kotlinx:dataframe:0.13.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

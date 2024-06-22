@@ -2,6 +2,7 @@ package com.example.m_search.ui.theme
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -43,7 +44,8 @@ fun EnterDataScreen(
     onBackButtonClicked: () -> Unit,
 ) {
 
-    var text by remember { mutableStateOf("") }
+    var firstNumber by remember { mutableStateOf("") }
+    var secondNumber by remember { mutableStateOf("") }
 
     Column(
         modifier = modifier.padding(16.dp),
@@ -72,14 +74,40 @@ fun EnterDataScreen(
                     modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)),
                     style = MaterialTheme.typography.bodyLarge
                 )
-                OutlinedTextField(
-                    modifier = Modifier,
-                    label = { Text("Enter number") },
-                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                    singleLine = true,
-                    value = text,
-                    onValueChange = { text = it},
-                )
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = dimensionResource(R.dimen.padding_small)
+                            ),
+                        label = { Text("...") },
+                        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                        singleLine = true,
+                        value = firstNumber,
+                        onValueChange = {
+                            if(it == "") firstNumber = it
+                            else if(it[it.length - 1].isDigit()) firstNumber = it
+                        },
+                    )
+                    Text(text = "-")
+                    OutlinedTextField(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = dimensionResource(R.dimen.padding_small)
+                            ),
+                        label = { Text("...") },
+                        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                        singleLine = true,
+                        value = secondNumber,
+                        onValueChange = {
+                            if(it == "") secondNumber = it
+                            else if(it[it.length - 1].isDigit()) secondNumber = it
+                                        },
+                    )
+                }
+
+
             }
         }
 

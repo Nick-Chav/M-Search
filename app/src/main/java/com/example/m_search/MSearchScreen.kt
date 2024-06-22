@@ -25,6 +25,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.m_search.ui.theme.DisplayResultsPreview
+import com.example.m_search.ui.theme.DisplayResultsScreen
 import com.example.m_search.ui.theme.EnterDataScreen
 import com.example.m_search.ui.theme.InstructionsScreen
 import com.example.m_search.ui.theme.SelectCountryScreen
@@ -37,7 +39,8 @@ enum class MSearchScreen {
     SELECT_COUNTRY,
     SELECT_MODE,
     MANUAL_SELECT,
-    INSTRUCTIONS
+    INSTRUCTIONS,
+    DISPLAY_RESULTS
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -109,7 +112,7 @@ fun MSearchApp(
                         navController.navigate(route = MSearchScreen.SELECT_MODE.name)
                     },
                     onBackButtonClicked = {
-                        navController.navigate(route = MSearchScreen.START.name)
+                        navController.navigateUp()
                     }
                 )
             }
@@ -123,7 +126,7 @@ fun MSearchApp(
                     },
                     onScanButtonClicked = {},
                     onBackButtonClicked = {
-                        navController.navigate(route = MSearchScreen.SELECT_COUNTRY.name)
+                        navController.navigateUp()
                     }
                 )
             }
@@ -132,9 +135,11 @@ fun MSearchApp(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(dimensionResource(R.dimen.padding_medium)),
-                    onNextButtonClicked = {},
+                    onNextButtonClicked = {
+                        navController.navigate(route = MSearchScreen.DISPLAY_RESULTS.name)
+                    },
                     onBackButtonClicked = {
-                        navController.navigate(route = MSearchScreen.SELECT_MODE.name)
+                        navController.navigateUp()
                     }
                 )
             }
@@ -144,7 +149,17 @@ fun MSearchApp(
                         .fillMaxSize()
                         .padding(dimensionResource(R.dimen.padding_medium)),
                     onBackButtonClicked = {
-                        navController.navigate(route = MSearchScreen.START.name)
+                        navController.navigateUp()
+                    }
+                )
+            }
+            composable(route = MSearchScreen.DISPLAY_RESULTS.name) {
+                DisplayResultsScreen(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(dimensionResource(R.dimen.padding_medium)),
+                    onBackButtonClicked = {
+                        navController.navigateUp()
                     }
                 )
             }

@@ -5,8 +5,12 @@
     <string name="manual_enter_title">Manual identification</string>
     <string name="app_next">Next</string>
     <string name="app_back">Back</string>
+    <string name="return_back">Return</string>
     <string name="start">Start</string>
+    <string name="test_med">Heroin</string>
     <string name="instructions">Instructions</string>
+    <string name="original_med">Original Medicine</string>
+    <string name="results">Results</string>
     <string name="instructions_content">Use the app according to the instructions given on each individual page. Use the X in the top left to return to the home screen.</string>
     <string name="select_from">Select country from:</string>
     <string name="select_to">Select country to:</string>
@@ -14,6 +18,6 @@
     <string name="mode_scan">Scan</string>
     <string name="app_description">The easy way to identify medicinal alternatives!</string>
     <string name="mode_selection_instructions">Please select which mode you want to use to identify your medication</string>
-    <string name="manual_instructions">Please enter the ndc code as indicated on the packaging</string>
+    <string name="manual_instructions">Please enter the 2 numbers of the ndc code as indicated on the packaging separated by the hyphen</string>
     <string name="country_selection_instructions">Please select the initial country the medication is coming from and the country you want to search for alternatives in.</string>
 </resources>
