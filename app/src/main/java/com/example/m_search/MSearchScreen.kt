@@ -3,7 +3,6 @@ package com.example.m_search
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -15,20 +14,22 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.example.m_search.ui.theme.MSearchViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.m_search.ui.theme.DisplayResultsPreview
+import androidx.navigation.compose.rememberNavController
 import com.example.m_search.ui.theme.DisplayResultsScreen
 import com.example.m_search.ui.theme.EnterDataScreen
 import com.example.m_search.ui.theme.InstructionsScreen
+import com.example.m_search.ui.theme.MSearchViewModel
 import com.example.m_search.ui.theme.SelectCountryScreen
 import com.example.m_search.ui.theme.SelectModeScreen
 import com.example.m_search.ui.theme.StartScreen
@@ -72,7 +73,6 @@ fun MSearchAppBar(
 
 @Composable
 fun MSearchApp(
-    viewModel: MSearchViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -87,6 +87,10 @@ fun MSearchApp(
                 navigateUp = { navController.popBackStack(MSearchScreen.START.name, inclusive = false) }
             )
     }) {innerPadding ->
+
+        val viewModel: MSearchViewModel = viewModel()
+        var ndcString by remember { mutableStateOf("") }
+
         NavHost(
             navController = navController,
             startDestination = MSearchScreen.START.name,
@@ -135,8 +139,9 @@ fun MSearchApp(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(dimensionResource(R.dimen.padding_medium)),
-                    onNextButtonClicked = {
+                    onNextButtonClicked = { newNDC: String ->
                         navController.navigate(route = MSearchScreen.DISPLAY_RESULTS.name)
+                        ndcString = newNDC
                     },
                     onBackButtonClicked = {
                         navController.navigateUp()
@@ -154,13 +159,16 @@ fun MSearchApp(
                 )
             }
             composable(route = MSearchScreen.DISPLAY_RESULTS.name) {
+                viewModel.getMedicines(ndcString)
                 DisplayResultsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(dimensionResource(R.dimen.padding_medium)),
                     onBackButtonClicked = {
                         navController.navigateUp()
-                    }
+                    },
+                    viewModel,
+
                 )
             }
         }

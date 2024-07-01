@@ -12,20 +12,21 @@ object DataSource {
     )
 
     val medicines = listOf(
-        Medicine(R.string.test_med, 12, "inject", "10mg", "bibibobo"),
-        Medicine(R.string.test_med, 12, "inject", "10mg", "bibibobo"),
-        Medicine(R.string.test_med, 12, "inject", "10mg", "bibibobo"),
-        Medicine(R.string.test_med, 12, "inject", "10mg", "bibibobo"),
-        Medicine(R.string.test_med, 12, "inject", "10mg", "bibibobo"),
-        Medicine(R.string.test_med, 12, "inject", "10mg", "bibibobo"),
-        Medicine(R.string.test_med, 12, "inject", "10mg", "bibibobo")
+        Medicine("Heroin", "inject", 12, "10mg", "bibibobo", 2.0),
+        Medicine("Heroin", "inject", 12, "10mg", "bibibobo", 2.0),
+        Medicine("Heroin", "inject", 12, "10mg", "bibibobo", 2.0),
+        Medicine("Heroin", "inject", 12, "10mg", "bibibobo", 2.0),
+        Medicine("Heroin", "inject", 12, "10mg", "bibibobo", 2.0),
+        Medicine("Heroin", "inject", 12, "10mg", "bibibobo", 2.0),
     )
 }
 
 data class Medicine(
-    @StringRes val name: Int,
-    val id: Int,
-    val mode: String,
     val dosage: String,
+    val form: String,
+    val id: Long,
     val ingredient: String,
+    val name: String,
+    val rank: Double
 )
+

@@ -32,6 +32,7 @@ fun StartScreen(
     onStartButtonClicked: () -> Unit,
     onInstructionsButtonClicked: () -> Unit,
 ) {
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceEvenly
@@ -70,12 +71,15 @@ fun StartScreen(
                 modifier = Modifier.widthIn(min = 250.dp),
                 onClick = onInstructionsButtonClicked
             ){
-                Text(text = stringResource(R.string.instructions))
+                Text(text = stringResource(R.string.transparency_statement))
             }
         }
     }
 }
-//TODO Fix Back button X interaction
+
+
+
+
 @Composable
 @Preview(showBackground = true)
 fun StartOrderPreview() {

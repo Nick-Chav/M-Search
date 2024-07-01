@@ -37,7 +37,7 @@ fun InstructionsScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = stringResource(R.string.instructions),
+            text = stringResource(R.string.transparency_statement),
             style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center,
         )
@@ -47,7 +47,7 @@ fun InstructionsScreen(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
         ) {
             Text(
-                text = stringResource(R.string.instructions_content),
+                text = stringResource(R.string.transparency_content),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center
             )
